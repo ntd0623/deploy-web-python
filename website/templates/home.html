@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+
+<form method="POST">
+  <textarea
+    name="note"
+    id="note"
+    class="form-control"
+    placeholder="Enter a note..."
+  ></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+</form>
+
+<hr />
+
+<h2 align="center">Danh sách tài khoản</h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tên</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.first_name }}</td>
+        {# Hoặc u.username tùy theo model #}
+        <td>{{ u.email }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
